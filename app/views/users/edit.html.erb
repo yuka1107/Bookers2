@@ -1,0 +1,29 @@
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <h2>User info</h2>
+    <form enctype="multipart/form-data" action="/users/40533" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="uMBFm4kyVuOOHCr3QXog6jQMt9jCE8wlhkdgBdd79VLlyTNtmxcxNePFvym4nLvM0XBPN85ZeZEHEEDHfH33yQ==">
+
+    <%= form_with model:@user, local:true do |f| %>
+      <div class="form-group">
+        <label for="user_name">Name</label>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
+      </div>
+     <div class="form-group">
+        <label for="user_image">Image</label>
+        <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+      </div>
+      <div class="form-group">
+        <label for="user_introduction">Introduction</label>
+        <%= f.text_field :introduction %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Updata User" %>
+      </div>
+    <% end %>
+    
+    </form>
+    </div>
+  </div>
+</div>
