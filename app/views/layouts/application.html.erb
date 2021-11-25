@@ -39,7 +39,11 @@
     </header>
 
     <main>
-      <p id="notice"></p>
+      <% if flash[:notice] %>
+      <p id="notice">
+        <%= flash[:notice] %>
+      </p>
+      <% end %>
       <%= yield %>
     </main>
 
@@ -52,5 +56,6 @@
         </div>
       </div>
     </footer>
+
   </body>
 </html>
