@@ -2,9 +2,9 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @book = Books.new(book_params)
+    @books = Books.new(book_params)
     @book.user_id = current_user.id
-    if @book.save
+    if @books.save
       flash[:notice] = "You have created book successfully."
       redirect_to books_path
     else
