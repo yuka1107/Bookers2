@@ -1,17 +1,25 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
 
+   before_action :authenticate_user!
+
+
   def create
-    @books = Books.new(book_params)
+    @book = Book.new(books_params)
     @book.user_id = current_user.id
-    if @books.save
-      flash[:notice] = "You have created book successfully."
-      redirect_to books_path
+    if @book.save
+      flash[:notice] = "Book was successfully posted!"
+      redirect_to(book_path(@book.id))
     else
-      @books=Book.all
-      @user =@book.user
-      render :index
+      err_msg = "error! Failed to update data.\n"
+      @book.errors.full_messages.each do |msg|
+        err_msg += msg + "\n"
+      end
+
+      flash[:alert] = err_msg
+      redirect_back(fallback_location: root_path)
     end
+
   end
 
   def index
@@ -25,30 +33,39 @@ class BooksController < ApplicationController
   end
 
   def edit
-    if Book.find(params[:id]).user_id == current_user.id
-      @book = Book.find(params[:id])
+    @book = Book.find(params[:id])
+    if @book.user == current_user
+      render :edit
+    else
+      redirect_to books_path
     end
   end
 
   def update
-    @book =Book.find(params[:id])
-    if @book.updata(book_params)
+    @book = Book.find(params[:id])
+    if @book.update(books_params)
       flash[:notice] = "Book was successfully updated!"
       redirect_to(book_path(@book.id))
     else
-      render :edit
+      err_msg = "error! Failed to update data.\n"
+      @book.errors.full_messages.each do |msg|
+        err_msg += msg + "\n"
+      end
+
+      flash[:alert] = err_msg
+      render(action: "edit")
     end
   end
 
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-    flash[:notice]="Book was successfully destroyed."
-    redirect_to books_path
+    redirect_to(books_path)
   end
 
   private
-  def book_params
-    params.require(:book).permit(:title, :body)
+  def books_params
+    params.require(:book).permit(:title,:body)
   end
+
 end
