@@ -1,13 +1,9 @@
-<div class="container-fluid">
+<div class="container">
       
   <div class="row ml-2">
     <div class="col-11 col-sm-10 col-lg-8 col-xl-6 mt-4 mx-auto">
       <h2>User info</h2>
-    </div>
-  </div>
-    
-  <div class="row ml-2">
-    <div class="col-11 col-sm-10 col-lg-8 col-xl-6 mt-4 mx-auto">
+      
       <%= form_with(model: @user,local: true) do |f| %>
         <div class="form-group">
           <%= f.label :name %>
@@ -24,7 +20,5 @@
         <%= f.submit "Update User",class: "btn btn-secondary" %>
       <% end %>
     </div>
-  </div>
-    
   </div>
 </div>
