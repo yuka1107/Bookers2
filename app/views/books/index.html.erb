@@ -1,11 +1,17 @@
-<div class="row">
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj form being saved:
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+<div class="container">
+  <div class="row">
 
     <%= render(partial: 'layouts/leftsidebar',locals: {user: @user}) %>
 
     <div class="col-md-8 offset-md-1">
-
       <h2 class="mt-4 mb-2">Books</h2>
-
       <table class="table table-word-wrap" >
         <thead>
           <th></th>
@@ -27,8 +33,7 @@
           <% end %>
         </tbody>
       </table>
-
     </div>
-
   </div>
+</div>
 
