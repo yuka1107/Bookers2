@@ -11,12 +11,13 @@
     <%= render(partial: 'layouts/leftsidebar',locals: {user: @user}) %>
 
     <div class="col-md-8 offset-md-1">
-      <h2 class="mt-4 mb-2">Books</h2>
-      <table class="table table-word-wrap" >
+      <h2>Books</h2>
+      <table class="table table-hover table-inverse">
         <thead>
           <th></th>
           <th>Title</th>
           <th>Opinion</th>
+          <th colspan="3"></th>
         </thead>
         <tbody>
           <% @books.each do |book| %>
@@ -24,10 +25,12 @@
             <tr>
               <td>
                 <%= link_to(user_path(user.id)) do %>
-                  <%= attachment_image_tag(user, :profile_image,fallback: "no_image.jpg",size: "50x50") %>
+                  <%= attachment_image_tag(user, :profile_image,fallback: "no_image.jpg",size: "40x40") %>
                 <% end %>
               </td>
-              <td><%= link_to(book.title,book_path(book.id)) %></td>
+              <td>
+                <%= link_to(book.title,book_path(book.id)) %>
+              </td>
               <td><%= book.body %></td>
             </tr>
           <% end %>
