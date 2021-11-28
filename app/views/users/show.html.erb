@@ -22,8 +22,10 @@
           </tr>
         </thead>
         
-        <% @books.each do |book| %>
+        
         <tbody>
+          <% books = Book.where(user_id: @user.id) %>
+          <% books.each do |book| %>
           <tr>
             <td>
               <%= link_to(user_path(@user.id)) do %>
@@ -31,12 +33,13 @@
               <% end %>
             <td>
               <%= link_to(book.title,book_path(book.id)) %>
-              <% end %>
+              
             </td>
             <td><%= book.body %></td>
           </tr>
+          <% end %>
         </tbody>
-        <% end %>
+        
       </table>
     </div>
   </div>
