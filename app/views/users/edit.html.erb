@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col-11 col-sm-10 col-lg-8 col-xl-6 mt-4 mx-auto">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2>User info</h2>
 
       <% if @user.errors.any? %>
-      <div class="error_explanatio">
-        <h3><%= @user.errors.count %>error prohibited this obj form being saved:</h3>
+      <div id="error_explanation">
+        <h3><%= @user.errors.count %> errors prohibited this book from being saved:</h3>
         <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li class="eroor-message"><%= message %></li>
-          <% end %>
+        <% @user.errors.full_messages.each do |message| %>
+          <li class="eroor-message"><%= message %></li>
+        <% end %>
         </ul>
       </div>
       <% end %>

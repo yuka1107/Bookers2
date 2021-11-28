@@ -1,38 +1,34 @@
 class UsersController < ApplicationController
 
-
   def index
-    @users = User.all
     @user = current_user
+    @users = User.all
+    @book = Book.new
+    @books = Book.all
   end
 
   def show
     @user = User.find(params[:id])
+    @book = Book.new
+    @books = Book.where(user_id: @user.id)
   end
 
   def edit
-    @user = User.find(current_user.id)
-    if User.find(params[:id]).id == current_user.id
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if @user == current_user
+        render "edit"
     else
-      flash[:alert] = "error! You are not allowed to edit other user's info"
-      redirect_to(user_path(current_user.id))
+      redirect_to user_path(current_user)
     end
   end
 
   def update
     @user = User.find(current_user.id)
     if @user.update(user_params)
-      flash[:notice] = "User data was successfully updated"
-      redirect_to(user_path(current_user.id))
+      flash[:notice] = "You have updated user successfully."
+      redirect_to user_path(current_user)
     else
-      err_msg = "error! Failed to update data.\n"
-      @user.errors.full_messages.each do |msg|
-        err_msg += msg + "\n"
-      end
-
-      flash[:alert] = err_msg
-      render(action: "edit")
+      render :edit
     end
   end
 
