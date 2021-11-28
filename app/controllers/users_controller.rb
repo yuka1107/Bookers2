@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
 
   def index
     @users = User.all
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @user.errors.full_messages.each do |msg|
         err_msg += msg + "\n"
       end
-      
+
       flash[:alert] = err_msg
       render(action: "edit")
     end

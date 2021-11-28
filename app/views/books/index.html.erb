@@ -8,7 +8,9 @@
 <div class="container">
   <div class="row">
 
-    <%= render(partial: 'layouts/leftsidebar',locals: {user: @user}) %>
+    <div class="col-md-3">
+      <%= render(partial: 'layouts/leftsidebar',locals: {user: @user}) %>
+    </div>  
 
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
@@ -39,4 +41,3 @@
     </div>
   </div>
 </div>
-

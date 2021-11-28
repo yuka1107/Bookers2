@@ -9,15 +9,14 @@
             <%= message %>
           <% end %>
         <% end %>
-
   	  <%= form_with model: @book, local:true do |f| %>
       <div class="form-group">
         <label for="book_title">Title</label>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, class: "form-control"%>
       </div>
       <div class="form-group">
         <label for="book_opinion">Opinion</label>
-        <%= f.text_field :body %>
+        <%= f.text_field :body, class: "form-control" %>
       </div>
       <div class="form-group">
         <div class="edit-btn">
@@ -25,11 +24,9 @@
         </div>
       </div>
       <% end %>
-
   		  <%= link_to "Show", book_path(@book) %> |
   		  <%= link_to "Back", books_path %>
 
     </div>
   </div>
 </div>
-
