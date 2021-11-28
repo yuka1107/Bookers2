@@ -8,9 +8,11 @@
 
 <div class="container">
   <div class="row">
+
     <div class="col-md-3">
-      <%= render(partial: 'layouts/leftsidebar',locals: {user: @user}) %>
-    </div>  
+      <%= render 'users/userinfo', user: @user %>
+      <%= render 'books/newbook', book: @book %>
+    </div>
 
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
@@ -23,8 +25,8 @@
             <th colspan="3"></th>
           </tr>
         </thead>
-        
-        
+
+
         <tbody>
           <% books = Book.where(user_id: @user.id) %>
           <% books.each do |book| %>
@@ -35,13 +37,13 @@
               <% end %>
             <td>
               <%= link_to(book.title,book_path(book.id)) %>
-              
+
             </td>
             <td><%= book.body %></td>
           </tr>
           <% end %>
         </tbody>
-        
+
       </table>
     </div>
   </div>

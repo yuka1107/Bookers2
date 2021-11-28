@@ -1,31 +1,37 @@
-<%= notice %>
-
-<<div class="container">
+<div class="container">
   <div class="row">
 
     <div class="col-md-3">
-      <%= render(partial: 'layouts/leftsidebar',locals: {user: @user}) %>
+      <%= render 'users/userinfo', user: @user %>
+      <%= render 'books/newbook', book: @book %>
     </div>
 
     <div class="col-md-8 offset-md-1">
-
       <h2>Book detail</h2>
-
       <table class="table">
         <tbody>
-          <% user = User.find(@book.user_id) %>
           <tr>
             <td>
-              <%= attachment_image_tag(user, :profile_image, fallback: "no_image.jpg",size: "40x40") %><br>
-              <%= link_to(user.name,user_path(user.id)) %>
+              <%= link_to user_path(@book.user_id) do %>
+              <%= attachment_image_tag @book.user, :profile_image, format: 'jpeg', fallback: "no-image-icon.jpg", size: "40x40" %><br>
+              <%= @user.name %>
+              <% end %>
             </td>
-            <td><%= link_to(@book.title,book_path(@book.id)) %></td>
+            <td>
+              <%= link_to book_path(@book.id) do %>
+              <%= @book.title %>
+              <% end %>
+            </td>
             <td><%= @book.body %></td>
-            <% if user_signed_in? && current_user.id == @book.user_id %>
-              <td><%= link_to("Edit",edit_book_path(@book.id),class: "btn btn-success") %></td>
-              <td><%= link_to("Destroy",book_path(@book.id),method: :delete,data:{confirm: "本当に消しますか？"},class: "btn btn-danger") %></td>
+            <% if @book.user == current_user %>
+            <td>
+              <%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %>
+            </td>
+            <td>
+              <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に消しますか？", class:"btn btn-sm btn-danger" %>
+            </td>
             <% end %>
-            </tr>
+          </tr>
         </tbody>
       </table>
     </div>
