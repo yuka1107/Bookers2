@@ -39,7 +39,7 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id
     if @book.update(books_params)
       flash[:notice] = "You have updated book successfully."
-      redirect_to books_path(@book.id)
+      redirect_to book_path(@book.id)
     else
       render :edit
     end
